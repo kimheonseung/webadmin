@@ -4,7 +4,7 @@ function Header() {
     const toggle = (e) => {
         e.preventDefault();
         document.getElementById("wrapper").classList.toggle("toggled");
-        // window.setTimeout(() => $(window).trigger('resize'),251);
+        window.setTimeout(() => window.dispatchEvent(new Event('resize')), 251);
     }
   return (
       <>
