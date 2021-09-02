@@ -1,76 +1,175 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../../components/layout/Layout';
 import GridLayout, { Responsive, WidthProvider } from 'react-grid-layout';
-import './DashboardPage.css';
+import ToastChart from '../../components/ToastChart';
 
 function DashboardPage() {
 
-    // const ResponsiveGridLayout = WidthProvider(Responsive);
     const GridLayoutWidthProvided = WidthProvider(GridLayout);
 
-    const [width, setWidth] = useState(1200);
-    const [height, setHeight] = useState(900);
-    const [rowHeight, setRowHeight] = useState(200);
-    const [cols, setCols] = useState(6);
-
-
-    // const calculateContainerSize = () => {
-    //     console.log(document.getElementById('grid-layout-wrap').offsetWidth);
-    //     console.log(document.getElementById('grid-layout-wrap').offsetHeight);
-    // }
-
-    // useEffect(() => {
-    //     window.addEventListener('resize', calculateContainerSize);
-    //     return () => {
-    //         window.removeEventListener('resize', calculateContainerSize);
-    //     }
-    // });
-
-    const layoutResponsive = {
-        lg: [
-            {i: 'a', x: 0, y: 0, w: 2, h: 3, static: true},
-            {i: 'b', x: 3, y: 0, w: 2, h: 2, static: true},
-            {i: 'c', x: 3, y: 2, w: 2, h: 1, static: true},
-            {i: 'd', x: 6, y: 0, w: 1, h: 3, static: true},
-            {i: 'e', x: 2, y: 0, w: 1, h: 1, static: true},
-            {i: 'f', x: 2, y: 1, w: 1, h: 1, static: true},
-            {i: 'g', x: 2, y: 2, w: 1, h: 1, static: true},
-        ]
+    const generateCategories = (count) => {
+        const categories = [];
+        for(let i = 0 ; i < count ; ++i) {
+            categories.push('c'+i);
+        }
+        return categories;
     }
 
-    const layout = [
-        {i: 'a', x: 0, y: 0, w: 2, h: 3, static: true},
-        {i: 'b', x: 3, y: 0, w: 2, h: 2, static: true},
-        {i: 'c', x: 3, y: 2, w: 2, h: 1, static: true},
-        {i: 'd', x: 6, y: 0, w: 1, h: 3, static: true},
-        {i: 'e', x: 2, y: 0, w: 1, h: 1, static: true},
-        {i: 'f', x: 2, y: 1, w: 1, h: 1, static: true},
-        {i: 'g', x: 2, y: 2, w: 1, h: 1, static: true},
-    ]
+    const generateSeries = (count) => {
+        
+        const data = [];
+        for(let i = 0 ; i < count ; ++i) {
+            data.push(Math.floor(Math.random() * 10) + 1);
+        }
+
+        const series = [{
+            name: '# of data',
+            data: data
+        }];
+        
+        return series;
+    }
+
+    const [rowHeight, setRowHeight] = useState(200);
+    const [cols, setCols] = useState(6);
+    const [fixed, setStatic] = useState(true);
+    const [layout, setLayout] = useState([
+        {
+            i: '0023', 
+            x: 0, 
+            y: 0, 
+            w: 2, 
+            h: 3, 
+            static: fixed
+        },
+        {
+            i: '2011', 
+            x: 2, 
+            y: 0, 
+            w: 1, 
+            h: 1, 
+            static: fixed
+        },
+        {
+            i: '2111', 
+            x: 2, 
+            y: 1, 
+            w: 1, 
+            h: 1, 
+            static: fixed
+        },
+        {
+            i: '2211', 
+            x: 2, 
+            y: 2, 
+            w: 1, 
+            h: 1, 
+            static: fixed
+        },
+        {
+            i: '3022', 
+            x: 3, 
+            y: 0, 
+            w: 2, 
+            h: 2, 
+            static: fixed
+        },
+        {
+            i: '3221', 
+            x: 3, 
+            y: 2, 
+            w: 2, 
+            h: 1, 
+            static: fixed
+        },
+        {
+            i: '6013', 
+            x: 6, 
+            y: 0, 
+            w: 1, 
+            h: 3, 
+            static: fixed
+        },
+    ]);
+
+    const [chartDataMap, setChartDataMap] = useState(
+        {
+            '0023': {
+                name: 'Chart1', 
+                type: 'Column', 
+                data: {
+                    categories: generateCategories(10), 
+                    series: generateSeries(10)
+                }
+            },
+            '2011': {
+                name: 'Chart2', 
+                type: 'Pie', 
+                data: {
+                    categories: generateCategories(2), 
+                    series: generateSeries(2)
+                }
+            },
+            '2111': {
+                name: 'Chart3', 
+                type: 'Pie', 
+                data: {
+                    categories: generateCategories(5), 
+                    series: generateSeries(5)
+                }
+            },
+            '2211': {
+                name: 'Chart4', 
+                type: 'Pie', 
+                data: {
+                    categories: generateCategories(3), 
+                    series: generateSeries(3)
+                }
+            },
+            '3022': {
+                name: 'Chart5', 
+                type: 'Bar', 
+                data: {
+                    categories: generateCategories(6), 
+                    series: generateSeries(6)
+                }
+            },
+            '3221': {
+                name: 'Chart6', 
+                type: 'LineArea', 
+                data: {
+                    categories: generateCategories(9), 
+                    series: generateSeries(9)
+                }
+            },
+            '6013': {
+                name: 'Chart7', 
+                type: 'Column', 
+                data: {
+                    categories: generateCategories(3), 
+                    series: generateSeries(3)
+                }
+            }
+        }
+    );
 
   return (
       <>
         <Layout>
-            {/* <div id="grid-layout-wrap"> */}
                 <GridLayoutWidthProvided className="layout" layout={layout} maxRows={cols} rowHeight={rowHeight} /*width={width}*/ cols={cols}>
-                    <div className="t-text red" key="a">i: 'a', x: 0, y: 0, w: 2, h: 3</div>
-                    <div className="t-text orange" key="b">i: 'b', x: 3, y: 0, w: 2, h: 2</div>
-                    <div className="t-text yellow" key="c">i: 'c', x: 3, y: 2, w: 2, h: 1</div>
-                    <div className="t-text green" key="d">i: 'd', x: 6, y: 0, w: 1, h: 3</div>
-                    <div className="t-text blue" key="e">i: 'e', x: 2, y: 0, w: 1, h: 1</div>
-                    <div className="t-text purple" key="f">i: 'f', x: 2, y: 1, w: 1, h: 1</div>
-                    <div className="t-text white" key="g">i: 'g', x: 2, y: 2, w: 1, h: 1</div>
+                    {
+                        layout.map(item => {
+                            const id = '' + item.x + item.y + item.w + item.h;
+                            // const chartId = 'chart-'+id;
+                            return <div className="t-chart-wrap" id={id} key={id}>
+                                        {/* <div className='t-chart' id={chartId}> */}
+                                            <ToastChart id={id} chartData={chartDataMap[id]}></ToastChart>
+                                        {/* </div> */}
+                                    </div>
+                        })
+                    }
+                    
                 </GridLayoutWidthProvided>
-                {/* <ResponsiveGridLayout className="layout" layouts={layoutResponsive} breakpoints={{lg: width, md: width, sm: width, xs: width, xxs: width}} cosl={{lg: 6, md: 6, sm: 6, xs: 6, xxs: 6}}>
-                    <div className="t-text red" key="a">i: 'a', x: 0, y: 0, w: 2, h: 3</div>
-                    <div className="t-text red" key="b">i: 'b', x: 3, y: 0, w: 2, h: 2</div>
-                    <div className="t-text red" key="c">i: 'c', x: 3, y: 2, w: 2, h: 1</div>
-                    <div className="t-text red" key="d">i: 'd', x: 6, y: 0, w: 1, h: 3</div>
-                    <div className="t-text red" key="e">i: 'e', x: 2, y: 0, w: 1, h: 1</div>
-                    <div className="t-text red" key="f">i: 'f', x: 2, y: 1, w: 1, h: 1</div>
-                    <div className="t-text red" key="g">i: 'g', x: 2, y: 2, w: 1, h: 1</div>
-                </ResponsiveGridLayout> */}
-            {/* </div> */}
         </Layout>
       </>
   );

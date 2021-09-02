@@ -20,7 +20,7 @@
 .form-control:focus { box-shadow: 0 0 0 0.1rem rgba(255, 255, 255, 0.5); }
 
 /* gridster */
-.gs-box { background-color: rgb(30, 30, 45); }
+.t-chart-wrap { background-color: rgb(30, 30, 45); }
 
 /* map monitoring cytoscape, slickgrid table */
 #cy { background-color: rgb(30, 30, 45); }
