@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import './LoginPage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../css/theme-common.css';
-import '../../css/theme-dark.css';
-import logo from '../../images/devh.PNG';
+import 'css/theme-common.css';
+import 'css/theme-dark.css';
+import logo from 'images/devh.PNG';
 
 function LoginPage() {
     return (

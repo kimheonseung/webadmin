@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Layout from '../../components/layout/Layout';
+import Layout from 'components/layout/Layout';
 import GridLayout, { Responsive, WidthProvider } from 'react-grid-layout';
-import ToastChart from '../../components/ToastChart';
+import ToastChart from 'components/ToastChart';
 
 function DashboardPage() {
 
@@ -162,9 +162,7 @@ function DashboardPage() {
                             const id = '' + item.x + item.y + item.w + item.h;
                             // const chartId = 'chart-'+id;
                             return <div className="t-chart-wrap" id={id} key={id}>
-                                        {/* <div className='t-chart' id={chartId}> */}
-                                            <ToastChart id={id} chartData={chartDataMap[id]}></ToastChart>
-                                        {/* </div> */}
+                                        <ToastChart id={id} chartData={chartDataMap[id]}></ToastChart>
                                     </div>
                         })
                     }

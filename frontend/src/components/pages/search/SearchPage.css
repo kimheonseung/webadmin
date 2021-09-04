@@ -1,0 +1,6 @@
+#container {color: cadetblue;display: flex;flex-direction: column;align-items: flex-end;}
+#gridSearch {height: 5%;}
+#grid {height: 90%;}
+#gridChild {height: 100%;}
+#gridPaging {height: 5%}
+#searchForm {height: 100%;}

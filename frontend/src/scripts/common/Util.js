@@ -33,3 +33,7 @@ export const getRandomRGBColorArray = (idx, transparency) => {
     }
     return colorArr;
 }
+
+export const getResultJson = (result) => {
+    return result.data.resultJson;
+}
