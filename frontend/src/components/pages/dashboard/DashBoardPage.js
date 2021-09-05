@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Layout from 'components/layout/Layout';
 import GridLayout, { Responsive, WidthProvider } from 'react-grid-layout';
-import ToastChart from 'components/ToastChart';
+// import ToastChart from 'components/ToastChart';
+import { drawChart } from 'scripts/common/ToastChart';
 
 function DashboardPage() {
 
@@ -153,20 +154,24 @@ function DashboardPage() {
         }
     );
 
+    useEffect(() => {
+        layout.map(item => {
+            const id = '' + item.x + item.y + item.w + item.h;
+            console.log(chartDataMap);
+            drawChart(id, chartDataMap[id]);
+        })
+    }, layout);
+
   return (
       <>
         <Layout>
-                <GridLayoutWidthProvided className="layout" layout={layout} maxRows={cols} rowHeight={rowHeight} /*width={width}*/ cols={cols}>
+                <GridLayoutWidthProvided className="layout" layout={layout} maxRows={cols} rowHeight={rowHeight} cols={cols}>
                     {
                         layout.map(item => {
                             const id = '' + item.x + item.y + item.w + item.h;
-                            // const chartId = 'chart-'+id;
-                            return <div className="t-chart-wrap" id={id} key={id}>
-                                        <ToastChart id={id} chartData={chartDataMap[id]}></ToastChart>
-                                    </div>
+                            return <div className="t-chart-wrap" id={id} key={id}></div>
                         })
                     }
-                    
                 </GridLayoutWidthProvided>
         </Layout>
       </>

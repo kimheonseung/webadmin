@@ -25,7 +25,7 @@
 /* map monitoring cytoscape, slickgrid table */
 #cy { background-color: rgb(30, 30, 45); }
 
-.sg-table { background-color: rgb(40, 40, 40); }
+.t-grid { background-color: rgb(40, 40, 40); }
 /* slickgrid */
 /* header column style */
 .slick-header-column.ui-state-default, .slick-group-header-column.ui-state-default {
