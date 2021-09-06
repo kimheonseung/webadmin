@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './MapPage.css';
-import { makeNode, makeGraph } from 'scripts/map/Cyto';
+import { makeGraph } from 'scripts/map/Cyto';
 import Layout from 'components/layout/Layout';
 
 function MapPage() {
-    const [nodes, setNodes] = useState([]);
-    const [style, setStyle] = useState([
+    const nodes = [];
+    const style = [
         {
             selector: 'node[type="manager"]',
             style: {
@@ -48,10 +48,10 @@ function MapPage() {
                 label: 'data(label)'
             }
         }
-    ]);
-    const [layout, setLayout] = useState({
+    ];
+    const layout = {
         name: 'grid',
-    });
+    };
     useEffect(() => {
         let cy = makeGraph(document.getElementById('cy'), nodes, style, layout);
 

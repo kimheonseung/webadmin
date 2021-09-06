@@ -1,4 +1,4 @@
-import {isStringEmpty, getRandomRGBColorArray} from './scripts/common/Util';
+// import {isStringEmpty, getRandomRGBColorArray} from './scripts/common/Util';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'css/simple-sidebar.css';
 import 'css/theme-common.css';

@@ -9,8 +9,6 @@ function Pagination({
     page,
     start,
     end,
-    prevPage,
-    nextPage,
     totalPage,
     pageList,
     handleClick,}) { 
@@ -18,13 +16,13 @@ function Pagination({
     return (
         <>
             <ul className="pagination pagination-sm">
-                <PagingPrevArrow start={start} prev={prev} prevPage={prevPage} />
+                <PagingPrevArrow start={start} prev={prev} handleClick={handleClick} />
                 {
                     pageList?.map((number, idx) => {
                         return <PagingNumber key={idx} page={page} number={number} handleClick={handleClick} />
                     })
                 }
-                <PagingNextArrow next={next} nextPage={nextPage} end={end} totalPage={totalPage} />
+                <PagingNextArrow next={next} nextPage={end + 1} end={end} totalPage={totalPage} handleClick={handleClick} />
             </ul>
         </>
     )

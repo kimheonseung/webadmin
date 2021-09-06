@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Layout from 'components/layout/Layout';
-import GridLayout, { Responsive, WidthProvider } from 'react-grid-layout';
-// import ToastChart from 'components/ToastChart';
+import GridLayout, { WidthProvider } from 'react-grid-layout';
 import { drawChart } from 'scripts/common/ToastChart';
 
 function DashboardPage() {
@@ -31,10 +30,10 @@ function DashboardPage() {
         return series;
     }
 
-    const [rowHeight, setRowHeight] = useState(200);
-    const [cols, setCols] = useState(6);
-    const [fixed, setStatic] = useState(true);
-    const [layout, setLayout] = useState([
+    const rowHeight = 200;
+    const cols = 6;
+    const fixed = true;
+    const layout = [
         {
             i: '0023', 
             x: 0, 
@@ -91,10 +90,9 @@ function DashboardPage() {
             h: 3, 
             static: fixed
         },
-    ]);
+    ];
 
-    const [chartDataMap, setChartDataMap] = useState(
-        {
+    const chartDataMap = {
             '0023': {
                 name: 'Chart1', 
                 type: 'Column', 
@@ -151,8 +149,7 @@ function DashboardPage() {
                     series: generateSeries(3)
                 }
             }
-        }
-    );
+    };
 
     useEffect(() => {
         layout.map(item => {

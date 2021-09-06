@@ -9,9 +9,8 @@ import { drawGrid } from 'scripts/common/ToastGrid';
 
 function SearchPage() {
 
-    let toastGrid;
-
-    const [columns, setColumns] = useState([
+    const gridDataUrl = 'http://localhost:8080/search/test';
+    const columns = [
         {
             header: "컬럼1",
             name: "col1"
@@ -24,41 +23,58 @@ function SearchPage() {
             header: "컬럼3",
             name: "col3"
         },
-    ]);
+    ];
 
-    const [gridDataUrl, setGridDataUrl] = useState('http://localhost:8080/search/test');
-    
-    const [gridData, setGridData] = useState({
-        end: 1,
-        next: 1,
+    const [toastGrid, setToastGrid] = useState(null);
+    const [page, setPage] = useState(1);
+    const [pagingInfo, setPagingInfo] = useState({
+        prev: false,
+        next: false,
         page: 1,
-        pageList: [1],
-        prev: 1,
-        rows: 20,
-        size: 10,
         start: 1,
-        total: 1,
-        totalPageL: 1,
-        voList: [],
+        end: 1,
+        // prevPage: 0,
+        // nextPage: 1,
+        totalPage: 1,
+        pageList: [1],
     });
+    // const [searchCondition, setSearchCondition] = useState({});
+
+
+    const handlePageClick = (number) => {
+        setPage(number);
+    }
+
+    const getPagingInfo = (gridData) => {
+        return {
+            prev: gridData?.prev,
+            next: gridData?.next,
+            page: gridData?.page,
+            start: gridData?.start,
+            end: gridData?.end,
+            totalPage: gridData?.totalPage,
+            pageList: gridData?.pageList,
+        }
+    }
 
     const getGridData = (page) => {
         const queryString = '?page='+page;
         axios
             .get(gridDataUrl+queryString)
             .then((result) => {
-                console.log(toastGrid);
                 const json = getResultJson(result);
-                setGridData(json);
+                const voList = json?.voList;
+                console.log(json);
+                setPagingInfo(getPagingInfo(json));
+
                 if(toastGrid) {
                     console.log('reset !');
-                    toastGrid.resetData(json.voList);
+                    toastGrid.resetData(voList);
                 }
                 else {
                     console.log('new !');
-                    toastGrid = drawGrid('grid', columns, json.voList);
+                    setToastGrid(drawGrid('grid', columns, voList));
                 }
-                console.log(json);
             })
             .catch((e) => {
                 console.log('catch !');
@@ -70,8 +86,8 @@ function SearchPage() {
     }
 
     useEffect(() => {
-        getGridData(1);
-    }, []);
+        getGridData(page);
+    }, [page]);
 
     return (
         <>
@@ -87,16 +103,14 @@ function SearchPage() {
                         </div>
                         <div id="gridPaging">
                             <Pagination 
-                                prev={gridData?.prev}
-                                next={gridData?.next}
-                                page={gridData?.page}
-                                start={gridData?.start}
-                                end={gridData?.end}
-                                prevPage={gridData?.prevPage}
-                                nextPage={gridData?.nextPage}
-                                totalPage={gridData?.totalPage}
-                                pageList={gridData?.pageList}
-                                handleClick={getGridData} />
+                                prev={pagingInfo?.prev}
+                                next={pagingInfo?.next}
+                                page={pagingInfo?.page}
+                                start={pagingInfo?.start}
+                                end={pagingInfo?.end}
+                                totalPage={pagingInfo?.totalPage}
+                                pageList={pagingInfo?.pageList}
+                                handleClick={handlePageClick} />
                         </div>
                     </form>
                 </div>

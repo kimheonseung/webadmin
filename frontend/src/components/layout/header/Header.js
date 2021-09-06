@@ -14,17 +14,17 @@ function Header() {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li className="nav-item">
-                        <a className="nav-link" href="#">사용자</a>
+                        <a className="nav-link" href="{() => false}">사용자</a>
                     </li>
                     <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a className="nav-link dropdown-toggle" href="{() => false}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Dropdown
                         </a>
                         <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a className="dropdown-item" href="#">Action</a>
-                            <a className="dropdown-item" href="#">Another action</a>
+                            <a className="dropdown-item" href="{() => false}">Action</a>
+                            <a className="dropdown-item" href="{() => false}">Another action</a>
                             <div className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="#">Something else here</a>
+                            <a className="dropdown-item" href="{() => false}">Something else here</a>
                         </div>
                     </li>
                 </ul>

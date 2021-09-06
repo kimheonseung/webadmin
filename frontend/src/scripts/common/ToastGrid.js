@@ -1,10 +1,6 @@
 import Grid from 'tui-grid';
 import 'tui-grid/dist/tui-grid.css';
 
-const defaultOptions = {
-    usageStatistics: false
-  };
-
 export const drawGrid = (id, columns, dataArray) => {
     Grid.applyTheme('default', {
         row: {
