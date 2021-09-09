@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.devh.springboot.webadmin.mapper.GridTestMapper">
+<mapper namespace="com.devh.springboot.webadmin.gridtest.mapper.GridTestMapper">
     <insert id="insertTestData" parameterType="java.util.List">
         INSERT INTO grid_test (col1, col2, col3)
         VALUES
@@ -9,11 +9,11 @@
         </foreach>
     </insert>
 
-    <select id="selectAll" resultType="GridTest">
+    <select id="selectAll" resultType="com.devh.springboot.webadmin.gridtest.model.GridTest">
         SELECT * FROM grid_test
     </select>
 
-    <select id="selectByPageSearch" resultType="GridTest" parameterType="com.devh.springboot.webadmin.common.paging.vo.PageSearchRequestVO">
+    <select id="selectByPageSearch" resultType="com.devh.springboot.webadmin.gridtest.model.GridTest" parameterType="com.devh.springboot.webadmin.common.paging.vo.PageSearchRequestVO">
         SELECT * FROM grid_test
         <include refid="whereSearchCondition">
             <property name="searchConditionVOList" value="searchConditionVOList" />

@@ -9,13 +9,13 @@ function PagingNextArrow({next, end, totalPage, handleClick}) {
             {
                 next ?
                     <li className="page-item">
-                        <a href="{() => false}" className="page-link" data-page={''+(end + 1)} onClick={() => handleClick(end + 1)}>
+                        <a className="page-link" data-page={''+(end + 1)} onClick={() => handleClick(end + 1)}>
                             <FontAwesomeIcon icon={faAngleRight} />
                         </a>
                     </li>
                 :
                     <li className="page-item disabled">
-                        <a href="{() => false}" className="page-link" data-page={''+(end + 1)} onClick={() => handleClick(end + 1)}>
+                        <a className="page-link" data-page={''+(end + 1)} onClick={() => handleClick(end + 1)}>
                             <FontAwesomeIcon icon={faAngleRight} />
                         </a>
                     </li>
@@ -23,13 +23,13 @@ function PagingNextArrow({next, end, totalPage, handleClick}) {
             {
                 totalPage > end ?
                     <li className="page-item">
-                        <a href="{() => false}" className="page-link" data-page={''+totalPage} onClick={() => handleClick(totalPage)}>
+                        <a className="page-link" data-page={''+totalPage} onClick={() => handleClick(totalPage)}>
                             <FontAwesomeIcon icon={faAngleDoubleRight} />
                         </a>
                     </li>
                 :
                     <li className="page-item disabled">
-                        <a href="{() => false}" className="page-link" data-page={''+totalPage} onClick={() => handleClick(totalPage)}>
+                        <a className="page-link" data-page={''+totalPage} onClick={() => handleClick(totalPage)}>
                             <FontAwesomeIcon icon={faAngleDoubleRight} />
                         </a>
                     </li>

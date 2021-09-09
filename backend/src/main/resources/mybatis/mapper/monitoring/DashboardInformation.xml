@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.devh.springboot.webadmin.monitoring.mapper.DashboardInformationMapper">
+    
+    <select id="selectDashboardInformationByDashboardId" parameterType="java.lang.String" resultType="com.devh.springboot.webadmin.monitoring.model.DashboardInformation">
+        SELECT  d.ID AS DASHBOARD_ID, d.NAME AS DASHBOARD_NAME, d.ROW, d.COLUMN, l.ID AS DASHBOARD_LAYOUT_ID, l.X, l.Y, l.W, l.H, l.CHART_ID, c.TEST AS CHART_TEST
+        FROM    DASHBOARD d 
+	        INNER JOIN DASHBOARD_LAYOUT l ON d.ID = l.DASHBOARD_ID
+	        INNER JOIN CHART c ON l.CHART_ID = c.ID
+        WHERE   d.ID = #{dashboardId}
+    </select>
+
+</mapper>

@@ -9,7 +9,7 @@ import { drawGrid } from 'scripts/common/ToastGrid';
 
 function SearchPage() {
 
-    const gridDataUrl = 'http://localhost:8080/search/test';
+    const gridDataUrl = 'http://localhost:8080/api/gridtest';
     const columns = [
         {
             header: "컬럼1",
@@ -33,8 +33,6 @@ function SearchPage() {
         page: 1,
         start: 1,
         end: 1,
-        // prevPage: 0,
-        // nextPage: 1,
         totalPage: 1,
         pageList: [1],
     });

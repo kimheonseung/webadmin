@@ -1,172 +1,80 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from 'components/layout/Layout';
 import GridLayout, { WidthProvider } from 'react-grid-layout';
-import { drawChart } from 'scripts/common/ToastChart';
+import axios from 'axios';
+import { getResultJson } from 'scripts/common/Util';
+import DashboardChart from 'components/dashboard/DashboardChart';
 
 function DashboardPage() {
 
     const GridLayoutWidthProvided = WidthProvider(GridLayout);
 
-    const generateCategories = (count) => {
-        const categories = [];
-        for(let i = 0 ; i < count ; ++i) {
-            categories.push('c'+i);
-        }
-        return categories;
-    }
-
-    const generateSeries = (count) => {
-        
-        const data = [];
-        for(let i = 0 ; i < count ; ++i) {
-            data.push(Math.floor(Math.random() * 10) + 1);
-        }
-
-        const series = [{
-            name: '# of data',
-            data: data
-        }];
-        
-        return series;
-    }
+    const [dashboardId, setDashboardId] = useState('DBD0000000000000');
+    const [layout, setLayout] = useState([]);
+    const [row, setRow] = useState(6);
+    const [column, setColumn] = useState(6);
 
     const rowHeight = 200;
-    const cols = 6;
+    const dashboardInformationUrlPrefix = 'http://localhost:8080/api/dashboard-information/';
     const fixed = true;
-    const layout = [
-        {
-            i: '0023', 
-            x: 0, 
-            y: 0, 
-            w: 2, 
-            h: 3, 
-            static: fixed
-        },
-        {
-            i: '2011', 
-            x: 2, 
-            y: 0, 
-            w: 1, 
-            h: 1, 
-            static: fixed
-        },
-        {
-            i: '2111', 
-            x: 2, 
-            y: 1, 
-            w: 1, 
-            h: 1, 
-            static: fixed
-        },
-        {
-            i: '2211', 
-            x: 2, 
-            y: 2, 
-            w: 1, 
-            h: 1, 
-            static: fixed
-        },
-        {
-            i: '3022', 
-            x: 3, 
-            y: 0, 
-            w: 2, 
-            h: 2, 
-            static: fixed
-        },
-        {
-            i: '3221', 
-            x: 3, 
-            y: 2, 
-            w: 2, 
-            h: 1, 
-            static: fixed
-        },
-        {
-            i: '6013', 
-            x: 6, 
-            y: 0, 
-            w: 1, 
-            h: 3, 
-            static: fixed
-        },
-    ];
 
-    const chartDataMap = {
-            '0023': {
-                name: 'Chart1', 
-                type: 'Column', 
-                data: {
-                    categories: generateCategories(10), 
-                    series: generateSeries(10)
-                }
-            },
-            '2011': {
-                name: 'Chart2', 
-                type: 'Pie', 
-                data: {
-                    categories: generateCategories(2), 
-                    series: generateSeries(2)
-                }
-            },
-            '2111': {
-                name: 'Chart3', 
-                type: 'Pie', 
-                data: {
-                    categories: generateCategories(5), 
-                    series: generateSeries(5)
-                }
-            },
-            '2211': {
-                name: 'Chart4', 
-                type: 'Pie', 
-                data: {
-                    categories: generateCategories(3), 
-                    series: generateSeries(3)
-                }
-            },
-            '3022': {
-                name: 'Chart5', 
-                type: 'Bar', 
-                data: {
-                    categories: generateCategories(6), 
-                    series: generateSeries(6)
-                }
-            },
-            '3221': {
-                name: 'Chart6', 
-                type: 'LineArea', 
-                data: {
-                    categories: generateCategories(9), 
-                    series: generateSeries(9)
-                }
-            },
-            '6013': {
-                name: 'Chart7', 
-                type: 'Column', 
-                data: {
-                    categories: generateCategories(3), 
-                    series: generateSeries(3)
-                }
-            }
-    };
+    const setRowColumn = (dashboardInformationArray) => {
+        if(dashboardInformationArray?.length > 0) {
+            const firstItem = dashboardInformationArray[0];
+            setRow(firstItem?.row);
+            setColumn(firstItem?.column);
+        }
+    }
+
+    const convertLayout = (dashboardInformationArray) => {
+        const result = [];
+        dashboardInformationArray.forEach(dashboardInformation => {
+            result.push({
+                x: dashboardInformation?.x,
+                y: dashboardInformation?.y,
+                w: dashboardInformation?.w,
+                h: dashboardInformation?.h,
+                i: ''+dashboardInformation?.x+dashboardInformation?.y+dashboardInformation?.w+dashboardInformation?.h,
+                chartId: dashboardInformation?.chartId,
+                static: fixed
+            });
+        });
+        return result;
+    }
+
+    const drawLayout = (dashboardId) => {
+        axios
+            .get(dashboardInformationUrlPrefix+dashboardId)
+            .then((result) => {
+                const dashboardInformationArray = getResultJson(result);
+                setRowColumn(dashboardInformationArray);
+                setLayout(convertLayout(dashboardInformationArray));
+            })
+            .catch((e) => {
+                console.log('catch !');
+                console.log(e);
+            })
+            .finally(() => {
+                console.log('finally !');
+            });
+    }
+
 
     useEffect(() => {
-        layout.map(item => {
-            const id = '' + item.x + item.y + item.w + item.h;
-            console.log(chartDataMap);
-            drawChart(id, chartDataMap[id]);
-        })
-    }, layout);
+        drawLayout(dashboardId);
+    }, [dashboardId]);
 
   return (
       <>
         <Layout>
-                <GridLayoutWidthProvided className="layout" layout={layout} maxRows={cols} rowHeight={rowHeight} cols={cols}>
+                <GridLayoutWidthProvided className="layout" layout={layout} maxRows={row} rowHeight={rowHeight} cols={column}>
                     {
                         layout.map(item => {
-                            const id = '' + item.x + item.y + item.w + item.h;
-                            return <div className="t-chart-wrap" id={id} key={id}></div>
+                            const id = item.i;
+                            const chartId = item.chartId;
+                            return <div className="t-chart-wrap" id={id} key={id}>
+                                <DashboardChart id={id} chartId={chartId}></DashboardChart>
+                            </div>
                         })
                     }
                 </GridLayoutWidthProvided>

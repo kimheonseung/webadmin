@@ -1,4 +1,4 @@
-package com.devh.springboot.webadmin.vo;
+package com.devh.springboot.webadmin.gridtest.vo;
 
 import lombok.Builder;
 import lombok.Data;

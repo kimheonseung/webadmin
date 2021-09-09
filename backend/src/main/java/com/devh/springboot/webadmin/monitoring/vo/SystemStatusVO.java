@@ -1,4 +1,4 @@
-package com.devh.springboot.webadmin.vo;
+package com.devh.springboot.webadmin.monitoring.vo;
 
 import lombok.Builder;
 import lombok.Data;

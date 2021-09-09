@@ -1,4 +1,4 @@
-package com.devh.springboot.webadmin.model;
+package com.devh.springboot.webadmin.gridtest.model;
 
 import lombok.Builder;
 import lombok.Getter;

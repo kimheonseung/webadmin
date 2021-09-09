@@ -1,10 +1,11 @@
-package com.devh.springboot.webadmin.service;
+package com.devh.springboot.webadmin.gridtest.service;
 
 import com.devh.springboot.webadmin.common.paging.vo.PageSearchRequestVO;
 import com.devh.springboot.webadmin.common.paging.vo.PageSearchResponseVO;
-import com.devh.springboot.webadmin.mapper.GridTestMapper;
-import com.devh.springboot.webadmin.model.GridTest;
-import com.devh.springboot.webadmin.vo.GridTestVO;
+import com.devh.springboot.webadmin.gridtest.mapper.GridTestMapper;
+import com.devh.springboot.webadmin.gridtest.model.GridTest;
+import com.devh.springboot.webadmin.gridtest.vo.GridTestVO;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

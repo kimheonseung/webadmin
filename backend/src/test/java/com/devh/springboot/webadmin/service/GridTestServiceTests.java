@@ -1,8 +1,10 @@
 package com.devh.springboot.webadmin.service;
 
 import com.devh.springboot.webadmin.common.util.ExceptionUtils;
-import com.devh.springboot.webadmin.model.GridTest;
-import com.devh.springboot.webadmin.vo.GridTestVO;
+import com.devh.springboot.webadmin.gridtest.model.GridTest;
+import com.devh.springboot.webadmin.gridtest.service.GridTestService;
+import com.devh.springboot.webadmin.gridtest.vo.GridTestVO;
+
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

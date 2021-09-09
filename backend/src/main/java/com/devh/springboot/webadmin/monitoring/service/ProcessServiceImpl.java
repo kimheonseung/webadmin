@@ -1,9 +1,10 @@
-package com.devh.springboot.webadmin.service;
+package com.devh.springboot.webadmin.monitoring.service;
 
-import com.devh.springboot.webadmin.vo.ProcessVO;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+
+import com.devh.springboot.webadmin.monitoring.vo.ProcessVO;
 
 @Service
 public class ProcessServiceImpl implements ProcessService {

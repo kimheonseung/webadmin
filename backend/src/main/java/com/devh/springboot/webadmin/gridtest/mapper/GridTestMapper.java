@@ -1,7 +1,8 @@
-package com.devh.springboot.webadmin.mapper;
+package com.devh.springboot.webadmin.gridtest.mapper;
 
 import com.devh.springboot.webadmin.common.paging.vo.PageSearchRequestVO;
-import com.devh.springboot.webadmin.model.GridTest;
+import com.devh.springboot.webadmin.gridtest.model.GridTest;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
