@@ -1,17 +1,18 @@
 package com.devh.springboot.webadmin.webuser.model;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import lombok.Data;
 import lombok.ToString;
 
-@Getter
-@Setter
-@Builder
+@Data
 @ToString
-public class WebUser {
+public class WebUser implements UserDetails {
     /* primary key */
     private String id;
     private String userId;
@@ -27,9 +28,38 @@ public class WebUser {
     private String loginIp;
     private String accessIp;
     /* foreign key */
-    private String roleId;
     private String networkMapId;
     private String dashboardLayoutId;
     private String description;
-    
+
+    private List<Role> roleList;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roleList;
+    }
+    @Override
+    public String getUsername() {
+        return this.userId;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        // lastPasswordChange
+        return true;
+    }
+    @Override
+    public boolean isAccountNonLocked() {
+        // loginFailCount
+        return true;
+    }
+    @Override
+    public boolean isCredentialsNonExpired() {
+        // lastPasswordChange
+        return true;
+    }
+    @Override
+    public boolean isEnabled() {
+        return isAccountNonExpired() && isAccountNonLocked() && isCredentialsNonExpired();
+    }
 }

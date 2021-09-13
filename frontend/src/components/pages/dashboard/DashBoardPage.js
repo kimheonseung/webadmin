@@ -67,6 +67,7 @@ function DashboardPage() {
   return (
       <>
         <Layout>
+                <div id="info" className="t-text"> INFO </div>
                 <GridLayoutWidthProvided className="layout" layout={layout} maxRows={row} rowHeight={rowHeight} cols={column}>
                     {
                         layout.map(item => {
