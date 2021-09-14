@@ -11,11 +11,12 @@ public class Role implements GrantedAuthority {
 
     private long id;
     private String code;
+    private String auth;
     private String name;
     private String description;
 
     @Override
     public String getAuthority() {
-        return code;
+        return "ROLE_"+auth;
     }
 }

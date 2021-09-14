@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  mariadb-webadmin:
+    image: mariadb:10.5.8
+    container_name: mariadb-webadmin
+    environment:
+      - MYSQL_ROOT_PASSWORD=webadmin
+      - MYSQL_DATABASE=webadmin
+      - MYSQL_USER=webadmin
+      - MYSQL_PASSWORD=webadmin
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    networks:
+      - webadmin-network
+      
+networks:
+  webadmin-network:
+    external: true
+

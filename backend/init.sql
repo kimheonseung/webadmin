@@ -38,6 +38,7 @@ CREATE TABLE `NETWORK_MAP` (
 CREATE TABLE `ROLE` (
     `ID` INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     `CODE` VARCHAR(4) UNIQUE NOT NULL,
+    `AUTH` VARCHAR(30) UNIQUE NOT NULL,
     `NAME` VARCHAR(30) UNIQUE NOT NULL,
     `DESCRIPTION` VARCHAR(500)
 );
@@ -97,10 +98,10 @@ INSERT INTO `DASHBOARD_LAYOUT` (`ID`, `X`, `Y`, `W`, `H`, `DASHBOARD_ID`, `CHART
     (7, 6, 0, 1, 3, 'DBD0000000000000', 7);
 INSERT INTO `NETWORK_MAP` (`ID`, `NAME`) VALUES
     ('NWM0000000000000', '기본맵');
-INSERT INTO `ROLE` (`ID`, `CODE`, `NAME`, `DESCRIPTION`) VALUES
-    (1, 'R000', '관리자', '모든 권한을 갖는 사용자'),
-    (2, 'R001', '사용자', '부분적 권한을 갖는 사용자'),
-    (3, 'R002', '특별 사용자', '특별한 부분에 권한을 갖는 사용자');
+INSERT INTO `ROLE` (`ID`, `CODE`, `AUTH`, `NAME`, `DESCRIPTION`) VALUES
+    (1, 'R000', 'ADMIN', '관리자', '모든 권한을 갖는 사용자'),
+    (2, 'R001', 'USER', '사용자', '부분적 권한을 갖는 사용자'),
+    (3, 'R002', 'SUSER', '특별 사용자', '특별한 부분에 권한을 갖는 사용자');
 INSERT INTO `WEB_USER` (`ID`, `USER_ID`, `NAME`, `PASSWORD`, `EMAIL`, `PHONE`, `LAST_LOGIN`, `LAST_PASSWORD_CHANGE`, `LAST_LOGIN_FAIL`, `LOGIN_FAIL_COUNT`, `LOGIN_FAIL_IP`, `LOGIN_IP`, `ACCESS_IP`, `DESCRIPTION`, `NETWORK_MAP_ID`, `DASHBOARD_ID`) VALUES
     ('USR0000000000000', 'admin', '김개발', '$2a$10$HPsXOkWUd52wnMx37JseMOxcmZezEJDS9uwSH01WVBzOw3CfPK9ry', 'admin@webadmin.hs', '010-1234-5678', now(), now(), now(), 0, NULL, '127.0.0.1', '*', '테스트 관리자', 'NWM0000000000000', 'DBD0000000000000');
 INSERT INTO `WEB_USER_ROLE` (`ID`, `WEB_USER_ID`, `ROLE_CODE`) VALUES
