@@ -23,12 +23,12 @@ public class MainController {
     private final ProcessService processService;
     private final WebUserMapper webUserMapper;
 
-    @GetMapping("api/auth/{userId}")
-    public String getUser(@PathVariable("userId") String userId) {
-        WebUser webUser = webUserMapper.selectByUserId(userId);
-        log.info(webUser);
-        return "DONE!";
-    }
+    // @GetMapping("api/auth/{userId}")
+    // public String getUser(@PathVariable("userId") String userId) {
+    //     WebUser webUser = webUserMapper.selectByUserId(userId);
+    //     log.info(webUser);
+    //     return "DONE!";
+    // }
 
     @GetMapping("system-status/process-list")
     public @ResponseBody ResponseEntity<Object> getProcessList() {

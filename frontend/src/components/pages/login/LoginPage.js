@@ -16,8 +16,8 @@ function LoginPage() {
             </div>
             <div className="t-login-form">
                 <form className="form-signin" method="post" action="/login">
-                    <label htmlFor="username" className="sr-only">Username</label>
-                    <input type="text" id="username" name="username" className="form-control" placeholder="ID" required autoFocus autoComplete="off"></input>
+                    <label htmlFor="userId" className="sr-only">Username</label>
+                    <input type="text" id="userId" name="userId" className="form-control" placeholder="ID" required autoFocus autoComplete="off"></input>
                     <div className="p-1"></div>
                     <label htmlFor="password" className="sr-only">Password</label>
                     <input type="password" id="password" name="password" className="form-control" placeholder="PASSWORD" required autoComplete="off"></input>
