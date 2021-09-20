@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "webadmin",
+    "password": "webadmin",
+    "database": "webadmin_node",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "webadmin",
+    "password": "webadmin",
+    "database": "webadmin_node",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "webadmin",
+    "password": "webadmin",
+    "database": "webadmin_node",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

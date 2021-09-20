@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-WebadminApplication<webadmin>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.devh.springboot.webadmin.WebadminApplication",
+            "projectName": "webadmin",
+            "args": ""
+        }
+    ]
+}
