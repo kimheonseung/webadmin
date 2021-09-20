@@ -1,0 +1,1 @@
+exports.selectAll = 'SELECT * FROM GRID_TEST'
