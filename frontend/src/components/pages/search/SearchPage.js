@@ -59,20 +59,17 @@ function SearchPage() {
         const queryString = '?page='+page;
         axios
             .get(gridDataUrl+queryString)
-            .then((result) => {
-                const json = getResultJson(result);
-                const voList = json?.voList;
-                console.log(json);
-                setPagingInfo(getPagingInfo(json));
+            .then((rs) => {
+                const paging      = rs.data.paging;
+                const dataArray   = rs.data.dataArray;
+                const searchQuery = rs.data.searchQuery;
 
-                if(toastGrid) {
-                    console.log('reset !');
-                    toastGrid.resetData(voList);
-                }
-                else {
-                    console.log('new !');
-                    setToastGrid(drawGrid('grid', columns, voList));
-                }
+                setPagingInfo(getPagingInfo(paging));
+
+                if(toastGrid)
+                    toastGrid.resetData(dataArray);
+                else
+                    setToastGrid(drawGrid('grid', columns, dataArray));
             })
             .catch((e) => {
                 console.log('catch !');

@@ -1,7 +1,14 @@
 const express = require('express');
-const router = express.Router();
-const GridTestController = require('../controllers/grid-test-controller');
+const router  = express.Router();
 
-router.get('/', GridTestController.findAll);
+const getRequestMiddleware   = require('../middlewares/search-middleware').getRequestMiddleware;
+const postRequestMiddleware  = require('../middlewares/search-middleware').postRequestMiddleware;
+const GridTestController     = require('../controllers/grid-test-controller');
+
+router.get('/**', getRequestMiddleware);
+router.get('/', GridTestController.getByPageSearch);
+
+router.post('/**', postRequestMiddleware);
+router.post('/', GridTestController.getByPageSearch);
 
 module.exports = router;

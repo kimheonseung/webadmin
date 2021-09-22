@@ -40,12 +40,17 @@ app.use(cors());
 
 /* add router */
 app.use('/api/gridtest', require('./routes/grid-test-route'));
+app.use('/api/monitoring', require('./routes/monitoring/monitoring-route'));
 
-sequelize.sync({force: false})
+sequelize
+    .sync({force: false})
     .then(() => {
         console.log("DB connected !");
-        app.listen(PORT, () => console.log(`Connection established and running on port : ${PORT}`))
     })
     .catch((err) => {
         console.error(err);
+        console.log('Check DB Connection Status...');
+        process.exit(0);
     })
+
+app.listen(PORT, () => console.log(`Connection established and running on port : ${PORT}`))

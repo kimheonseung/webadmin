@@ -15,7 +15,8 @@ function DashboardPage() {
     const [column, setColumn] = useState(6);
 
     const rowHeight = 200;
-    const dashboardInformationUrlPrefix = 'http://localhost:8080/api/dashboard-information/';
+    // const dashboardInformationUrlPrefix = 'http://localhost:8080/api/dashboard-information/';
+    const dashboardInformationUrlPrefix = 'http://localhost:8080/api/monitoring/dashboard-information/';
     const fixed = true;
 
     const setRowColumn = (dashboardInformationArray) => {
@@ -45,8 +46,10 @@ function DashboardPage() {
     const drawLayout = (dashboardId) => {
         axios
             .get(dashboardInformationUrlPrefix+dashboardId)
-            .then((result) => {
-                const dashboardInformationArray = getResultJson(result);
+            .then((rs) => {
+                const dashboardInformationArray = rs.data.dataArray;
+                console.log(dashboardInformationArray);
+                // const dashboardInformationArray = getResultJson(result);
                 setRowColumn(dashboardInformationArray);
                 setLayout(convertLayout(dashboardInformationArray));
             })
