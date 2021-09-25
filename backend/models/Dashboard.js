@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Dashboard = sequelize.define('Dashboard', {
+    const Dashboard = sequelize.define('dashboard', {
         id: {
             type: DataTypes.STRING(16),
             primaryKey: true,

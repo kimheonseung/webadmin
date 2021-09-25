@@ -1,13 +1,27 @@
-const DashboardInformationService = require('../../services/monitoring/dashboard-information-service');
+const { Dashboard, Chart, DashboardLayout } = require('../../models');
+const dataConverter = require('../../utils/data-convert-util');
 
 exports.getByDashboardId = async (req, res, next) => {
+
     try {
         const { dashboardId } = req.params;
-        let rows = await DashboardInformationService.findByDashboardId(dashboardId);
-        return res.json({
-            'dataArray': rows[0],
+        await DashboardLayout.findAll({
+            where: { dashboardId: dashboardId },
+            include: [
+                { model: Dashboard, required: true }, 
+                { model: Chart, required: true },
+            ]
+        })
+        .then(data => {
+            res.json({
+                'dataArray': dataConverter.convertDataToArray(data)
+            })
+        })
+        .catch(err => {
+            res.json({'error': err});
         });
     } catch (error) {
-        return res.status(500).json(err);
+        console.log(error);
+        res.json({'error': error});
     }
 }

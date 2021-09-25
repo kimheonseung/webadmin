@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { getResultJson } from 'scripts/common/Util';
 import { drawChart } from 'scripts/common/ToastChart';
 
-function DashboardChart({id, chartId}) {
+function DashboardChart({id, chart}) {
 
     const generateCategories = (count) => {
         const categories = [];
@@ -28,9 +26,6 @@ function DashboardChart({id, chartId}) {
         return series;
     }
 
-    // const chartUrlPrefix = 'http://localhost:8080/api/chart/';
-    const chartUrlPrefix = 'http://localhost:8080/api/monitoring/chart/';
-
     const convertChartData = (chart) => {
         const dataCount = chart?.dataCount;
         return {
@@ -43,27 +38,13 @@ function DashboardChart({id, chartId}) {
         }
     }
 
-    const getChartData = (chartId) => {
-        axios
-            .get(chartUrlPrefix+chartId)
-            .then((rs) => {
-                const chart = rs.data.dataArray[0];
-                // const chart = getResultJson(result);
-                drawChart(id, convertChartData(chart));
-
-            })
-            .catch((e) => {
-                console.log('catch !');
-                console.log(e);
-            })
-            .finally(() => {
-                console.log('finally !');
-            });
+    const getChartData = () => {
+        drawChart(id, convertChartData(chart));
     }
 
     useEffect(() => {
-        getChartData(chartId);
-    }, [chartId]);
+        getChartData();
+    }, [chart]);
 
   return (
         <>

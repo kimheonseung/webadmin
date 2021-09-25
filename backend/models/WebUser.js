@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const WebUser = sequelize.define('WebUser', {
+    const WebUser = sequelize.define('webUser', {
         id: {
             type: DataTypes.STRING(16),
             primaryKey: true,

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const NetworkMap = sequelize.define('NetworkMap', {
+    const NetworkMap = sequelize.define('networkMap', {
         id: {
             type: DataTypes.STRING(16),
             primaryKey: true,

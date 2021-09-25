@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Chart = sequelize.define('Chart', {
+    const Chart = sequelize.define('chart', {
         id: {
             type: DataTypes.INTEGER.UNSIGNED,
             autoIncrement: true,

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const WebUserAuthority = sequelize.define('WebUserAuthority', {
+    const WebUserAuthority = sequelize.define('webUserAuthority', {
         id: {
             type: DataTypes.INTEGER.UNSIGNED,
             autoIncrement: true,

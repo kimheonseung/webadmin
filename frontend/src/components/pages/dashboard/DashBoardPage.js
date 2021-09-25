@@ -15,15 +15,14 @@ function DashboardPage() {
     const [column, setColumn] = useState(6);
 
     const rowHeight = 200;
-    // const dashboardInformationUrlPrefix = 'http://localhost:8080/api/dashboard-information/';
     const dashboardInformationUrlPrefix = 'http://localhost:8080/api/monitoring/dashboard-information/';
     const fixed = true;
 
     const setRowColumn = (dashboardInformationArray) => {
         if(dashboardInformationArray?.length > 0) {
             const firstItem = dashboardInformationArray[0];
-            setRow(firstItem?.row);
-            setColumn(firstItem?.column);
+            setRow(firstItem?.dashboard.row);
+            setColumn(firstItem?.dashboard.column);
         }
     }
 
@@ -36,7 +35,7 @@ function DashboardPage() {
                 w: dashboardInformation?.w,
                 h: dashboardInformation?.h,
                 i: ''+dashboardInformation?.x+dashboardInformation?.y+dashboardInformation?.w+dashboardInformation?.h,
-                chartId: dashboardInformation?.chartId,
+                chart: dashboardInformation?.chart,
                 static: fixed
             });
         });
@@ -49,7 +48,6 @@ function DashboardPage() {
             .then((rs) => {
                 const dashboardInformationArray = rs.data.dataArray;
                 console.log(dashboardInformationArray);
-                // const dashboardInformationArray = getResultJson(result);
                 setRowColumn(dashboardInformationArray);
                 setLayout(convertLayout(dashboardInformationArray));
             })
@@ -75,9 +73,9 @@ function DashboardPage() {
                     {
                         layout.map(item => {
                             const id = item.i;
-                            const chartId = item.chartId;
+                            const chart = item.chart;
                             return <div className="t-chart-wrap" id={id} key={id}>
-                                <DashboardChart id={id} chartId={chartId}></DashboardChart>
+                                <DashboardChart id={id} chart={chart}></DashboardChart>
                             </div>
                         })
                     }

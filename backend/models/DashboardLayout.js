@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const DashboardLayout = sequelize.define('DashboardLayout', {
+    const DashboardLayout = sequelize.define('dashboardLayout', {
         id: {
             type: DataTypes.INTEGER.UNSIGNED,
             autoIncrement: true,

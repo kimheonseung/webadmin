@@ -1,7 +1,7 @@
 /* paging */
 const DEFAULT_PAGE       = 1;        /* current page */
 const DEFAULT_SIZE       = 10;       /* page list size (1~10 ...) */
-const DEFAULT_ROWS       = 10;       /* data per page */
+const DEFAULT_ROWS       = 20;       /* data per page */
 const DEFAULT_OFFSET     = 0;        /* query offset */
 const DEFAULT_TOTAL      = 0;        /* search result data count */
 const DEFAULT_TOTAL_PAGE = 0;        /* total page */

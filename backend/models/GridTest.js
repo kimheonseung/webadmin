@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const GridTest = sequelize.define('GridTest', {
+    const GridTest = sequelize.define('gridTest', {
         col1: {
             type: DataTypes.STRING(500),
         },

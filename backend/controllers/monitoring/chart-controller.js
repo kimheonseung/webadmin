@@ -1,13 +1,20 @@
-const ChartService = require('../../services/monitoring/chart-service');
+const { Chart } = require('../../models');
+const dataConverter = require('../../utils/data-convert-util');
 
 exports.getByChartId = async (req, res, next) => {
     try {
         const { chartId } = req.params;
-        let rows = await ChartService.findByChartId(chartId);
-        return res.json({
-            'dataArray': rows[0],
+        await Chart.findByPk(chartId)
+        .then(data => {
+            res.json({
+                'dataArray': dataConverter.convertDataToArray(data)
+            });
+        })
+        .catch(err => {
+            res.json({'error': err});
         });
     } catch (error) {
-        return res.status(500).json(err);
+        console.log(error);
+        res.json({'error': error});
     }
 }
