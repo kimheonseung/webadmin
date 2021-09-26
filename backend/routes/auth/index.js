@@ -1,6 +1,9 @@
-const express = require('express');
+const dotenv   = require('dotenv');
+const express  = require('express');
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
+const jwt      = require('jsonwebtoken');
+
+dotenv.config();
 
 const router = express.Router();
 
@@ -27,7 +30,7 @@ router.post('/login', async (req, res, next) => {
                     id: user.id,
                     name: user.name,
                     auth: user.auth
-                }, 'jwt-secret-key');
+                }, process.env.JWT_SECRET_KEY);
 
                 res.json({token});
             });

@@ -47,6 +47,7 @@ passportConfig();
 /* add router */
 app.use('/api/gridtest', require('./routes/grid-test-route'));
 app.use('/api/monitoring', require('./routes/monitoring/monitoring-route'));
+app.use('/api/system-status', require('./routes/system-status/system-status-route'));
 app.use('/api/auth', require('./routes/auth'));
 
 sequelize

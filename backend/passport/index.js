@@ -1,7 +1,10 @@
-const passport = require('passport');
-const { Strategy: LocalStrategy } = require('passport-local');
+const dotenv                                = require('dotenv');
+const passport                              = require('passport');
+const { Strategy: LocalStrategy }           = require('passport-local');
 const { ExtractJwt, Strategy: JWTStrategy } = require('passport-jwt');
-const bcrypt = require('bcrypt');
+const bcrypt                                = require('bcrypt');
+
+dotenv.config();
 
 const { WebUser } = require('../models');
 
@@ -35,7 +38,7 @@ const passportVerify = async (userId, password, done) => {
 
 const jwtConfig = {
     jwtFromRequest: ExtractJwt.fromHeader('authorization'), // request에서 jwt의 위치 설정 (header의 authorization)
-    secretOrKey: 'jwt-secret-key' // 복호화를 위한 암호 키 (생성시 설정한 값과 동일하게)
+    secretOrKey: process.env.JWT_SECRET_KEY // 복호화를 위한 암호 키 (생성시 설정한 값과 동일하게)
 }
 
 const jwtVerify = async (jwtPayload, done) => {
