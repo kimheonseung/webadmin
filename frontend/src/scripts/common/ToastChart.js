@@ -217,8 +217,9 @@ const defaultOption = (chartData) => {
         responsive: {
     
         },
-        theme: {
-            
+        series: chartData.option ? chartData.option.series :
+        {
+
         }
     };
 }
@@ -264,7 +265,8 @@ export const drawChart = (id, chartData) => {
 
     switch (chartType) {
         case 'Bar':
-            drawBarChart(el, data, {...defaultOption(chartData), theme: {...defaultTheme, ...barTheme}});
+            const option = {...defaultOption(chartData), theme: {...defaultTheme, ...barTheme, ...chartData.theme ? chartData.theme : {}}};
+            drawBarChart(el, data, option);
             break;
         case 'Column':
             drawColumnChart(el, data, {...defaultOption(chartData), theme: {...defaultTheme, ...barTheme}});
