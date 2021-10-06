@@ -154,7 +154,7 @@ function DashboardPage() {
     useEffect(() => {
         layout.map(item => {
             const id = '' + item.x + item.y + item.w + item.h;
-            console.log(chartDataMap);
+            // console.log(chartDataMap);
             drawChart(id, chartDataMap[id]);
         })
     }, layout);

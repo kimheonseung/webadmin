@@ -57,27 +57,28 @@ function SearchPage() {
 
     const getGridData = (page) => {
         const queryString = '?page='+page;
-        axios
-            .get(gridDataUrl+queryString)
-            .then((rs) => {
-                const paging      = rs.data.paging;
-                const dataArray   = rs.data.dataArray;
-                const searchQuery = rs.data.searchQuery;
-
-                setPagingInfo(getPagingInfo(paging));
-
-                if(toastGrid)
-                    toastGrid.resetData(dataArray);
-                else
-                    setToastGrid(drawGrid('grid', columns, dataArray));
-            })
-            .catch((e) => {
-                console.log('catch !');
-                console.log(e);
-            })
-            .finally(() => {
-                console.log('finally !');
-            });
+        axios({
+            method: 'GET',
+            url: gridDataUrl+queryString,
+            headers: {[process.env.REACT_APP_TOKEN_HEADER]: localStorage.getItem(process.env.REACT_APP_TOKEN_KEY)}
+        })
+        .then((rs) => {
+            const paging      = rs.data.paging;
+            const dataArray   = rs.data.dataArray;
+            const searchQuery = rs.data.searchQuery;
+            setPagingInfo(getPagingInfo(paging));
+            if(toastGrid)
+                toastGrid.resetData(dataArray);
+            else
+                setToastGrid(drawGrid('grid', columns, dataArray));
+        })
+        .catch((e) => {
+            console.log('catch !');
+            console.log(e);
+        })
+        .finally(() => {
+            console.log('finally !');
+        });
     }
 
     useEffect(() => {

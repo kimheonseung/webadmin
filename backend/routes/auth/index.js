@@ -14,25 +14,32 @@ router.post('/login', async (req, res, next) => {
 
             /* 인증 실패 또는 유저가 없는 경우 */
             if(passportError || !user) {
-                res.status(400).json({message: info.reason});
+                res/*.status(400)*/.json({status: 400, result: false, message: info.reason});
                 return;
             }
 
             /* user 데이터를 통해 로그인 진행 */
             req.login(user, {session: false}, (loginError) => {
                 if(loginError) {
-                    res.send(loginError);
+                    res/*.status(400)*/.json({status: 400, result: false, message: loginError});
                     return;
                 }
 
                 /* 클라이언트에게 전달할 jwt 생성 */
+                const authArray = [];
+                const webUserAuthorities = user.webUserAuthorities;
+                if(webUserAuthorities) {
+                    webUserAuthorities.forEach(auth => {
+                        authArray.push(auth.authorityCode);
+                    });
+                }
                 const token = jwt.sign({
                     id: user.id,
                     name: user.name,
-                    auth: user.auth
+                    authorityCodeArray: authArray
                 }, process.env.JWT_SECRET_KEY);
 
-                res.json({token});
+                res.json({status: 200, result: true, token: token});
             });
 
         })(req, res);

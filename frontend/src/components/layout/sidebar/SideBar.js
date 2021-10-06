@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { faSignInAlt, faSearch, faEye, faChartPie, faSitemap, faChartBar } from '@fortawesome/free-solid-svg-icons';
 import SideBarMenu from './SideBarMenu';
 import SideBarSubMenu from './SideBarSubMenu';
+import { getToken } from 'scripts/common/AuthUtil';
 
 function SideBar() {
   const menuSelected = (path) => {
@@ -16,15 +17,15 @@ function SideBar() {
     menuSelected(window.location.pathname);
   })
   /* login 관련 메뉴 상수 */
-  const login = {
-    menu: {
-      title: '로그인',
-      group: 'Login',
-      hasSubMenu: false,
-      href: '/login',
-      icon: faSignInAlt,
-    }
-  }
+  // const login = {
+  //   menu: {
+  //     title: '로그인',
+  //     group: 'Login',
+  //     hasSubMenu: false,
+  //     href: '/login',
+  //     icon: faSignInAlt,
+  //   }
+  // }
   /* search 관련 메뉴 상수 */
   const search = {
     menu: {
@@ -68,6 +69,9 @@ function SideBar() {
     }
   }
 
+  useEffect(() => {
+  })
+
   return (
       <>
       {/* flex를 위한 div */}
@@ -76,7 +80,7 @@ function SideBar() {
           <div className="t-sidebar-logo">Developer H.</div>
           <div className="p-2"></div>
           <div className="list-group list-group-flush">
-              <SideBarMenu title={login.menu.title} group={login.menu.group} hasSubMenu={login.menu.hasSubMenu} href={login.menu.href} icon={login.menu.icon} />
+              {/* <SideBarMenu title={login.menu.title} group={login.menu.group} hasSubMenu={login.menu.hasSubMenu} href={login.menu.href} icon={login.menu.icon} /> */}
               <SideBarMenu title={search.menu.title} group={search.menu.group} hasSubMenu={search.menu.hasSubMenu} href={search.menu.href} icon={search.menu.icon} />
               <SideBarMenu title={monitoring.menu.title} group={monitoring.menu.group} hasSubMenu={monitoring.menu.hasSubMenu} icon={monitoring.menu.icon}
                 subMenuArray={[

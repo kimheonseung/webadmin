@@ -32,12 +32,15 @@ function Process({id, urlPrefix}) {
   ]
 
   useEffect(() => {
-    axios
-    .get(urlPrefix+'/process')
+    axios({
+      method: 'GET',
+      url: urlPrefix+'/process',
+      headers: {[process.env.REACT_APP_TOKEN_HEADER]: localStorage.getItem(process.env.REACT_APP_TOKEN_KEY)}
+    })
     .then((rs) => {
-        const data = rs.data.dataArray;
-        drawGrid('grid', columns, data);
-        console.log(data);
+      const data = rs.data.dataArray;
+      drawGrid('grid', columns, data);
+      console.log(data);
     })
     .catch((err) => {
         console.log(err);

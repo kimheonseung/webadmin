@@ -6,7 +6,7 @@ const bcrypt                                = require('bcrypt');
 
 dotenv.config();
 
-const { WebUser } = require('../models');
+const { WebUser, WebUserAuthority } = require('../models');
 
 const passportConfig = {
     usernameField: 'userId',
@@ -15,8 +15,16 @@ const passportConfig = {
 
 const passportVerify = async (userId, password, done) => {
     try {
-        const user = await WebUser.findOne({where: {userId: userId}});
-
+        // const user = await WebUser.findOne({where: {userId: userId}});
+        const user = await WebUser.findOne({
+            include: [
+                {model: WebUserAuthority}
+            ],
+            where: {
+                userId: userId
+            }
+        });
+        
         if(!user) {
             done(null, false, {reason: `Not exist ${userId}`});
             return;

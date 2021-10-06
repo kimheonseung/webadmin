@@ -50,15 +50,18 @@ function Ram({id, urlPrefix}) {
   }
 
   useEffect(() => {
-    axios
-    .get(urlPrefix+'/ram')
+    axios({
+      method: 'GET',
+      url: urlPrefix+'/ram',
+      headers: {[process.env.REACT_APP_TOKEN_HEADER]: localStorage.getItem(process.env.REACT_APP_TOKEN_KEY)}
+    })
     .then((rs) => {
-        const data = rs.data.dataArray;
+      const data = rs.data.dataArray;
 
-        if(data.length > 0) {
-          const d = parseToChartData(data[0]);
-          drawChart(id, d);
-        }
+      if(data.length > 0) {
+        const d = parseToChartData(data[0]);
+        drawChart(id, d);
+      }
     })
     .catch((err) => {
         console.log(err);

@@ -43,21 +43,24 @@ function DashboardPage() {
     }
 
     const drawLayout = (dashboardId) => {
-        axios
-            .get(dashboardInformationUrlPrefix+dashboardId)
-            .then((rs) => {
-                const dashboardInformationArray = rs.data.dataArray;
-                console.log(dashboardInformationArray);
-                setRowColumn(dashboardInformationArray);
-                setLayout(convertLayout(dashboardInformationArray));
-            })
-            .catch((e) => {
-                console.log('catch !');
-                console.log(e);
-            })
-            .finally(() => {
-                console.log('finally !');
-            });
+        axios({
+            method: 'GET',
+            url: dashboardInformationUrlPrefix+dashboardId,
+            headers: {[process.env.REACT_APP_TOKEN_HEADER]: localStorage.getItem(process.env.REACT_APP_TOKEN_KEY)}
+        })
+        .then((rs) => {
+            const dashboardInformationArray = rs.data.dataArray;
+            // console.log(dashboardInformationArray);
+            setRowColumn(dashboardInformationArray);
+            setLayout(convertLayout(dashboardInformationArray));
+        })
+        .catch((e) => {
+            console.log('catch !');
+            console.log(e);
+        })
+        .finally(() => {
+            console.log('finally !');
+        });
     }
 
 

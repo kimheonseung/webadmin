@@ -2,15 +2,22 @@ const express = require('express');
 const router  = express.Router();
 const SystemStatusController = require('../../controllers/system-status/system-status-controller');
 
-// router.get('/cpu', async (req, res, next) => {
-//     try {
-//         cpuData();
-//         res.json({result: true});
-//     } catch (error) {
-//         console.log(error);
-//         next();
-//     }
-// });
+router.get('/cpu', async (req, res, next) => {
+    try {
+        SystemStatusController.getCpuData()
+        .then((cpu) => {
+            console.log(cpu);
+            res.json({'dataArray': [cpu]});
+        })
+        .catch ((error) => {
+            console.log(error);
+            res.json({'error': error});
+        });
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+});
 
 router.get('/ram', async (req, res, next) => {
     try {

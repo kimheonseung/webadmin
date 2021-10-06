@@ -52,6 +52,22 @@ const lspaceFormat = (value, space) => {
 }
 
 
+exports.getCpuData = async () => {
+    try {
+
+        const data = await si.cpu();
+
+        return data;
+        
+    } catch (error) {
+        console.log(error);
+        return {
+            'error': error
+        }
+    }
+}
+
+
 
 exports.getRamData = async () => {
     try {

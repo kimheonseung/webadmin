@@ -65,8 +65,12 @@ function Disk({id, urlPrefix}) {
     return chartData;
   }
   useEffect(() => {
-    axios
-    .get(urlPrefix+'/disk')
+
+    axios({
+      method: 'GET',
+      url: urlPrefix+'/disk',
+      headers: {[process.env.REACT_APP_TOKEN_HEADER]: localStorage.getItem(process.env.REACT_APP_TOKEN_KEY)}
+    })
     .then((rs) => {
         const data = rs.data.dataArray;
 

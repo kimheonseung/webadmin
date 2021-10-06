@@ -11,7 +11,13 @@ import DashboardPage from 'components/pages/dashboard/DashBoardPage';
 import SystemStatusPage from 'components/pages/system-status/SystemStatusPage';
 import MapPage from 'components/pages/map/MapPage';
 import SearchPage from 'components/pages/search/SearchPage';
+import PrivateRoute from 'PrivateRoute';
+import dotenv from 'dotenv';
+import { printAuthInfo } from 'scripts/common/AuthUtil';
 
+dotenv.config();
+
+printAuthInfo();
 
 function App() {
 
@@ -19,12 +25,11 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/search" component={SearchPage} />
-        <Route exact path="/system-status" component={SystemStatusPage} />
-        <Route exact path="/map" component={MapPage} />
-        <Route exact path="/dashboard" component={DashboardPage} />
-        <Route path="/" component={Home} />
-
+        <PrivateRoute exact path="/" component={Home} />
+        <PrivateRoute exact path="/search" component={SearchPage} />
+        <PrivateRoute exact path="/system-status" component={SystemStatusPage} />
+        <PrivateRoute exact path="/map" component={MapPage} />
+        <PrivateRoute exact path="/dashboard" component={DashboardPage} />
       </Switch>
     </Router>
   );
