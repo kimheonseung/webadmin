@@ -75,6 +75,12 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: "*",
             comment: "접근 가능 IP"
         },
+        departmentCode: {
+            type: DataTypes.STRING(16),
+            allowNull: true,
+            defaultValue: null,
+            comment: "부서 코드"
+        },
         networkMapId: {
             type: DataTypes.STRING(16),
             allowNull: true,

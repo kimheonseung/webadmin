@@ -19,3 +19,9 @@ export const printAuthInfo = () => {
     else
         console.log('token not exist');
 }
+
+export const getAuthInfo = () => {
+    const key = localStorage.getItem(process.env.REACT_APP_TOKEN_KEY);
+    const authObject = jwt.verify(key, process.env.REACT_APP_JWT_SECRET_KEY);
+    return authObject;
+}

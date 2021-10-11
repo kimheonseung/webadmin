@@ -3,7 +3,7 @@ import Layout from 'components/layout/Layout';
 import GridLayout, { WidthProvider } from 'react-grid-layout';
 import axios from 'axios';
 import { getResultJson } from 'scripts/common/Util';
-import DashboardChart from 'components/dashboard/DashboardChart';
+import DashboardChart from './DashboardChart';
 
 function DashboardPage() {
 

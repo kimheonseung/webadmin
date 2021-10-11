@@ -26,6 +26,10 @@
 #cy { background-color: rgb(30, 30, 45); }
 
 .t-grid { background-color: rgb(40, 40, 40); }
+
+/* toast grid */
+.tui-grid-body-area { background-color: rgb(20, 20, 20) !important; }
+
 /* slickgrid */
 /* header column style */
 .slick-header-column.ui-state-default, .slick-group-header-column.ui-state-default {

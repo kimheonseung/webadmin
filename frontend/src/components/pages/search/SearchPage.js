@@ -1,11 +1,9 @@
 import Layout from 'components/layout/Layout';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { getResultJson } from 'scripts/common/Util';
-import Pagination from 'components/paging/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'components/pages/search/SearchPage.css';
-import { drawGrid } from 'scripts/common/ToastGrid';
+import ToastGrid from 'components/grid/ToastGrid';
 
 function SearchPage() {
 
@@ -25,7 +23,7 @@ function SearchPage() {
         },
     ];
 
-    const [toastGrid, setToastGrid] = useState(null);
+    const [searchList, setSearchList] = useState([]);
     const [page, setPage] = useState(1);
     const [pagingInfo, setPagingInfo] = useState({
         prev: false,
@@ -39,7 +37,7 @@ function SearchPage() {
     // const [searchCondition, setSearchCondition] = useState({});
 
 
-    const handlePageClick = (number) => {
+    const handlePagingClick = (number) => {
         setPage(number);
     }
 
@@ -66,11 +64,9 @@ function SearchPage() {
             const paging      = rs.data.paging;
             const dataArray   = rs.data.dataArray;
             const searchQuery = rs.data.searchQuery;
+            console.log(paging);
             setPagingInfo(getPagingInfo(paging));
-            if(toastGrid)
-                toastGrid.resetData(dataArray);
-            else
-                setToastGrid(drawGrid('grid', columns, dataArray));
+            setSearchList(dataArray);
         })
         .catch((e) => {
             console.log('catch !');
@@ -94,20 +90,7 @@ function SearchPage() {
                             <label htmlFor="searchInput">검색어 </label><input type="text" id="searchInput" placeholder="keyword" />
                             <button id="searchBtn">icon</button>
                         </div>
-                        <div id="gridWrap">
-                            <div id="grid" className="t-grid"></div>
-                        </div>
-                        <div id="gridPaging">
-                            <Pagination 
-                                prev={pagingInfo?.prev}
-                                next={pagingInfo?.next}
-                                page={pagingInfo?.page}
-                                start={pagingInfo?.start}
-                                end={pagingInfo?.end}
-                                totalPage={pagingInfo?.totalPage}
-                                pageList={pagingInfo?.pageList}
-                                handleClick={handlePageClick} />
-                        </div>
+                        <ToastGrid columns={columns} dataArray={searchList} pagingInfo={pagingInfo} handlePagingClick={handlePagingClick} />
                     </form>
                 </div>
             </Layout>

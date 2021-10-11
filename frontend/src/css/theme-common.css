@@ -43,4 +43,5 @@ a:hover, a:active, a:focus { background-color:transparent !important; }
 /* bootstrap */
 .container-fluid { padding-top: 15px; padding-bottom: 15px; height: 100%; }
 .navbar { padding: 0.4rem; }
+.pagination { justify-content: center;  }
 #container { width: 100%; height: 100%; }

@@ -53,7 +53,10 @@ exports.pagingResponse = (paging) => {
     const end = Math.min(tempEnd, totalPage);
     const prev = start > 1;
     const next = totalPage > tempEnd;
-    const pageList = Array.from(new Array(size), (x, i) => (i + start));
+
+    const listSize = end % size == 0 ? size : end % size;
+
+    const pageList = Array.from(new Array(listSize), (x, i) => (i + start));
 
     return {
         ...paging,

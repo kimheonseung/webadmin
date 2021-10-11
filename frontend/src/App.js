@@ -14,6 +14,7 @@ import SearchPage from 'components/pages/search/SearchPage';
 import PrivateRoute from 'PrivateRoute';
 import dotenv from 'dotenv';
 import { printAuthInfo } from 'scripts/common/AuthUtil';
+import UserManagementPage from 'components/pages/user/management/UserManagementPage';
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ function App() {
         <PrivateRoute exact path="/system-status" component={SystemStatusPage} />
         <PrivateRoute exact path="/map" component={MapPage} />
         <PrivateRoute exact path="/dashboard" component={DashboardPage} />
+        <PrivateRoute exact path="/user/management" component={UserManagementPage} />
       </Switch>
     </Router>
   );

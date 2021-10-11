@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { faSignInAlt, faSearch, faEye, faChartPie, faSitemap, faChartBar } from '@fortawesome/free-solid-svg-icons';
+import { faSignInAlt, faSearch, faEye, faChartPie, faSitemap, faChartBar, faUsers, faUser } from '@fortawesome/free-solid-svg-icons';
 import SideBarMenu from './SideBarMenu';
 import SideBarSubMenu from './SideBarSubMenu';
 import { getToken } from 'scripts/common/AuthUtil';
@@ -69,6 +69,24 @@ function SideBar() {
     }
   }
 
+  const user = {
+    menu: {
+      title: '사용자',
+      group: 'User',
+      hasSubMenu: true,
+      icon: faUsers,
+    },
+    subMenu: {
+      management: {
+        key: 'user-management',
+        title: '사용자 관리',
+        group: 'User',
+        icon: faUser,
+        href: '/user/management'
+      },
+    }
+  }
+
   useEffect(() => {
   })
 
@@ -87,6 +105,10 @@ function SideBar() {
                   <SideBarSubMenu key={monitoring.subMenu.systemStatus.key} title={monitoring.subMenu.systemStatus.title}  group={monitoring.subMenu.systemStatus.group} href={monitoring.subMenu.systemStatus.href} icon={monitoring.subMenu.systemStatus.icon} />, 
                   <SideBarSubMenu key={monitoring.subMenu.map.key} title={monitoring.subMenu.map.title} group={monitoring.subMenu.map.group} href={monitoring.subMenu.map.href} icon={monitoring.subMenu.map.icon} />,
                   <SideBarSubMenu key={monitoring.subMenu.dashboard.key} title={monitoring.subMenu.dashboard.title} group={monitoring.subMenu.dashboard.group} href={monitoring.subMenu.dashboard.href} icon={monitoring.subMenu.dashboard.icon} />,
+                ]} />
+              <SideBarMenu title={user.menu.title} group={user.menu.group} hasSubMenu={user.menu.hasSubMenu} icon={user.menu.icon} 
+                subMenuArray={[
+                  <SideBarSubMenu key={user.subMenu.management.key} title={user.subMenu.management.title}  group={user.subMenu.management.group} href={user.subMenu.management.href} icon={user.subMenu.management.icon} />, 
                 ]} />
           </div>
         </div>

@@ -10,7 +10,7 @@ function Process({id, urlPrefix}) {
       name: 'pid',
     },
     {
-      header: 'PID',
+      header: 'PPID',
       name: 'parentPid',
     },
     {

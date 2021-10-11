@@ -64,7 +64,7 @@ function SystemStatusPage() {
     const column = 9;
     const rowHeight = 200;
 
-    const systemStatusUrlPrefix = 'http://localhost:8080/api/system-status';
+    const systemStatusUrlPrefix = 'http://localhost:8080/api/monitoring/system-status';
 
     // const [networkData, setNetworkData] = useState([]);
     // const [networkConnectionData, setNetworkConnectionData] = useState([]);

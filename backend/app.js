@@ -45,9 +45,9 @@ app.use(passport.initialize());
 passportConfig();
 
 /* add router */
-app.use('/api/gridtest', passport.authenticate('jwt', {session: false}), require('./routes/grid-test-route'));
-app.use('/api/monitoring', passport.authenticate('jwt', {session: false}), require('./routes/monitoring/monitoring-route'));
-app.use('/api/system-status', passport.authenticate('jwt', {session: false}), require('./routes/system-status/system-status-route'));
+app.use('/api/gridtest', passport.authenticate('jwt', {session: false}), require('./routes/grid-test'));
+app.use('/api/monitoring', passport.authenticate('jwt', {session: false}), require('./routes/monitoring'));
+app.use('/api/user'/*, passport.authenticate('jwt', {session: false})*/, require('./routes/user'));
 app.use('/api/auth', require('./routes/auth'));
 
 sequelize

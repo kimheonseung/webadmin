@@ -18,6 +18,7 @@ db.Authority        = require('./Authority')(sequelize, Sequelize);
 db.WebUser          = require('./webUser')(sequelize, Sequelize);
 db.WebUserAuthority = require('./WebUserAuthority')(sequelize, Sequelize);
 db.GridTest         = require('./GridTest')(sequelize, Sequelize);
+db.Department       = require('./Department')(sequelize, Sequelize);
 
 /* CONSTRAINTS */
 /* DASHBOARD_LAYOUT (N) : DASHBOARD (1) */
@@ -26,12 +27,17 @@ db.DashboardLayout.belongsTo(db.Dashboard, {foreignKey: 'dashboardId', targetKey
 /* DASHBOARD_LAYOUT (1) : CHART (1) */
 db.Chart.hasOne(db.DashboardLayout, {foreignKey: 'chartId', sourceKey: 'id'});
 db.DashboardLayout.belongsTo(db.Chart, {foreignKey: 'chartId', targetKey: 'id'});
+/* DEPARTMENT (N) : DEPARTMENT (1) */
+db.Department.hasOne(db.Department, {foreignKey: 'upperDepartmentCode', sourceKey: 'code'});
 /* WEB_USER (1) : DASHBOARD (1) */
 db.Dashboard.hasOne(db.WebUser, {foreignKey: 'dashboardId', sourceKey: 'id'});
 db.WebUser.belongsTo(db.Dashboard, {foreignKey: 'dashboardId', targetKey: 'id'});
 /* WEB_USER (1) : NETWORK_MAP (1) */
 db.NetworkMap.hasOne(db.WebUser, {foreignKey: 'networkMapId', sourceKey: 'id'});
 db.WebUser.belongsTo(db.NetworkMap, {foreignKey: 'networkMapId', targetKey: 'id'});
+/* WEB_USER (1) : DEPARTMENT (1) */
+db.Department.hasOne(db.WebUser, {foreignKey: 'departmentCode', sourceKey: 'code'});
+db.WebUser.belongsTo(db.Department, {foreignKey: 'departmentCode', targetKey: 'code'});
 /* WEB_USER_AUTHORITY (N) : WEB_USER (1) */
 db.WebUser.hasMany(db.WebUserAuthority, {foreignKey: 'webUserId', sourceKey: 'id'});
 db.WebUserAuthority.belongsTo(db.WebUser, {foreignKey: 'webUserId', targetKey: 'id'});
