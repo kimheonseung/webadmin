@@ -2,7 +2,7 @@ import Pagination from 'components/paging/Pagination';
 import React, { useEffect, useState } from 'react';
 import { drawGrid } from 'scripts/common/ToastGrid';
 
-function ToastGrid({columns, dataArray, pagingInfo, handlePagingClick}) {
+function ToastGrid({cssId, columns, dataArray, pagingInfo, handlePagingClick}) {
 
     const [grid, setGrid] = useState(null);
     // const [dataArray, setDataArray] = useState([]);
@@ -27,10 +27,10 @@ function ToastGrid({columns, dataArray, pagingInfo, handlePagingClick}) {
 
     return (
         <>
-            <div id="gridWrap">
+            <div className="gridWrap" id={cssId}>
                 <div id="grid" className="t-grid"></div>
             </div>
-            <div id="gridPaging">
+            <div className="gridPaging" id="gridPaging">
                 {/* <div id="left" /> */}
                 {
                     pagingInfo ?

@@ -3,6 +3,9 @@ a:hover, a:active, a:focus { background-color:transparent !important; }
 /* border-radius */
 .t-br-2 { border-radius: 2px !important; }
 
+/* Header */
+.t-navbar { display: flex; justify-content: space-between; align-items: center; height: 3rem; }
+
 /* Sidebar */
 .t-sidebar { height: 100%; }
 .t-sidebar-logo { padding: 0.875rem 0.875rem; font-size: 1rem; border-radius: 5px; }
@@ -45,3 +48,18 @@ a:hover, a:active, a:focus { background-color:transparent !important; }
 .navbar { padding: 0.4rem; }
 .pagination { justify-content: center;  }
 #container { width: 100%; height: 100%; }
+
+/* grid */
+.gridWrap { display: flex; justify-content: center; align-items: center; }
+
+/* btn-3 */
+.t-btn-3-wrap { display: flex; justify-content: end; padding: 0.3rem; }
+.t-btn-3 { display: flex; justify-content: center; align-items: center; }
+
+/* padding */
+.rp-1 { padding-right: 0.3rem; }
+.lp-1 { padding-left: 0.3rem; }
+
+/* margin */
+.rm-1 { margin-right: 0.3rem; }
+.lm-1 { margin-left: 0.3rem; }

@@ -1,7 +1,6 @@
 import Layout from 'components/layout/Layout';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'components/pages/search/SearchPage.css';
 import ToastGrid from 'components/grid/ToastGrid';
 
@@ -90,7 +89,7 @@ function SearchPage() {
                             <label htmlFor="searchInput">검색어 </label><input type="text" id="searchInput" placeholder="keyword" />
                             <button id="searchBtn">icon</button>
                         </div>
-                        <ToastGrid columns={columns} dataArray={searchList} pagingInfo={pagingInfo} handlePagingClick={handlePagingClick} />
+                        <ToastGrid cssId="search-grid" columns={columns} dataArray={searchList} pagingInfo={pagingInfo} handlePagingClick={handlePagingClick} />
                     </form>
                 </div>
             </Layout>

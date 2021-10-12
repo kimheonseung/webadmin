@@ -99,13 +99,13 @@ function SideBar() {
           <div className="p-2"></div>
           <div className="list-group list-group-flush">
               {/* <SideBarMenu title={login.menu.title} group={login.menu.group} hasSubMenu={login.menu.hasSubMenu} href={login.menu.href} icon={login.menu.icon} /> */}
-              <SideBarMenu title={search.menu.title} group={search.menu.group} hasSubMenu={search.menu.hasSubMenu} href={search.menu.href} icon={search.menu.icon} />
               <SideBarMenu title={monitoring.menu.title} group={monitoring.menu.group} hasSubMenu={monitoring.menu.hasSubMenu} icon={monitoring.menu.icon}
                 subMenuArray={[
+                  <SideBarSubMenu key={monitoring.subMenu.dashboard.key} title={monitoring.subMenu.dashboard.title} group={monitoring.subMenu.dashboard.group} href={monitoring.subMenu.dashboard.href} icon={monitoring.subMenu.dashboard.icon} />,
                   <SideBarSubMenu key={monitoring.subMenu.systemStatus.key} title={monitoring.subMenu.systemStatus.title}  group={monitoring.subMenu.systemStatus.group} href={monitoring.subMenu.systemStatus.href} icon={monitoring.subMenu.systemStatus.icon} />, 
                   <SideBarSubMenu key={monitoring.subMenu.map.key} title={monitoring.subMenu.map.title} group={monitoring.subMenu.map.group} href={monitoring.subMenu.map.href} icon={monitoring.subMenu.map.icon} />,
-                  <SideBarSubMenu key={monitoring.subMenu.dashboard.key} title={monitoring.subMenu.dashboard.title} group={monitoring.subMenu.dashboard.group} href={monitoring.subMenu.dashboard.href} icon={monitoring.subMenu.dashboard.icon} />,
                 ]} />
+              <SideBarMenu title={search.menu.title} group={search.menu.group} hasSubMenu={search.menu.hasSubMenu} href={search.menu.href} icon={search.menu.icon} />
               <SideBarMenu title={user.menu.title} group={user.menu.group} hasSubMenu={user.menu.hasSubMenu} icon={user.menu.icon} 
                 subMenuArray={[
                   <SideBarSubMenu key={user.subMenu.management.key} title={user.subMenu.management.title}  group={user.subMenu.management.group} href={user.subMenu.management.href} icon={user.subMenu.management.icon} />, 

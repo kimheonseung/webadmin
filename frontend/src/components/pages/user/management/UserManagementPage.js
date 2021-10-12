@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Layout from 'components/layout/Layout';
 import axios from 'axios';
 import GridLayout, { WidthProvider } from 'react-grid-layout';
-import { drawGrid } from 'scripts/common/ToastGrid';
+import { faPlus, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ToastGrid from 'components/grid/ToastGrid';
+import './UserManagementPage.css';
 
 
 function UserManagementPage() {
@@ -11,6 +13,8 @@ function UserManagementPage() {
     const GridLayoutWidthProvided = WidthProvider(GridLayout);
 
     const [userList, setUserList] = useState([]);
+
+    const buttonSize = "xs";
 
     const w = 4;
     const h = 2;
@@ -100,7 +104,12 @@ function UserManagementPage() {
         <Layout>
             <GridLayoutWidthProvided className="layout" layout={gridLayout} maxRows={row} rowHeight={rowHeight} cols={column}>
                 <div className="t-chart-wrap" id="t-user-list" key={0}>
-                    <ToastGrid columns={columns} dataArray={userList} />
+                    <div className="t-btn-3-wrap">
+                        <button className="btn btn-secondary t-btn-3"><FontAwesomeIcon size={buttonSize} icon={faEdit} /></button>
+                        <button className="btn btn-secondary t-btn-3 rm-1 lm-1 "><FontAwesomeIcon size={buttonSize} icon={faPlus} /></button>
+                        <button className="btn btn-secondary t-btn-3"><FontAwesomeIcon size={buttonSize} icon={faTrash} /></button>
+                    </div>
+                    <ToastGrid cssId="user-grid" columns={columns} dataArray={userList} />
                 </div>
                 <div className="t-chart-wrap" id="t-chart-wrap-disk" key={1}>
                     
