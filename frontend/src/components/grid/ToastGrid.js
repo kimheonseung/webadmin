@@ -22,15 +22,15 @@ function ToastGrid({cssId, columns, dataArray, pagingInfo, handlePagingClick}) {
         if(grid)
             grid.resetData(dataArray);
         else
-            setGrid(drawGrid('grid', columns, dataArray));
+            setGrid(drawGrid(cssId+'-grid', columns, dataArray));
     }, [dataArray]);
 
     return (
         <>
             <div className="gridWrap" id={cssId}>
-                <div id="grid" className="t-grid"></div>
+                <div id={cssId+'-grid'} className="t-grid"></div>
             </div>
-            <div className="gridPaging" id="gridPaging">
+            <div className="gridPaging" >
                 {/* <div id="left" /> */}
                 {
                     pagingInfo ?

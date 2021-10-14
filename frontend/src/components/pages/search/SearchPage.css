@@ -1,7 +1,7 @@
 #container {color: cadetblue;display: flex;flex-direction: column;align-items: flex-end;}
 #gridSearch {height: 5%;}
 #search-grid {height: 89%;}
-#grid {height: 100%; width: 98%;}
+.t-grid {height: 100%; width: 98%;}
 #gridChild {height: 100%;}
 .gridPaging {height: 5%}
 .page-item {cursor: pointer;}

@@ -13,6 +13,7 @@ function UserManagementPage() {
     const GridLayoutWidthProvided = WidthProvider(GridLayout);
 
     const [userList, setUserList] = useState([]);
+    const [departmentList, setDepartmentList] = useState([]);
 
     const buttonSize = "xs";
 
@@ -52,7 +53,38 @@ function UserManagementPage() {
 
     const urlPrefix = 'http://localhost:8080/api/user';
 
-    const columns = [
+    const userColumns = [
+        {
+            hidden: true,
+            header: 'ID',
+            name: 'id',
+        },
+        {
+            header: '아이디',
+            name: 'userId',
+        },
+        {
+            header: '이름',
+            name: 'name',
+        },
+        {
+            header: '이메일',
+            name: 'email',
+        },
+        {
+            header: '부서',
+            name: 'department',
+            formatter: (data) => {
+                const value = data.value;
+                if(value)
+                    return value.name;
+                else
+                    return '부서 없음';
+            }
+        },
+    ]
+
+    const departmentColumns = [
         {
             hidden: true,
             header: 'ID',
@@ -87,12 +119,25 @@ function UserManagementPage() {
     useEffect(() => {
         axios({
             method: 'GET',
-            url: urlPrefix+'/list',
+            url: urlPrefix+'/user-list',
             headers: {[process.env.REACT_APP_TOKEN_HEADER]: localStorage.getItem(process.env.REACT_APP_TOKEN_KEY)}
         })
         .then((rs) => {
             const dataArray = rs.data.dataArray;
             setUserList(dataArray);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+        axios({
+            method: 'GET',
+            url: urlPrefix+'/department-list',
+            headers: {[process.env.REACT_APP_TOKEN_HEADER]: localStorage.getItem(process.env.REACT_APP_TOKEN_KEY)}
+        })
+        .then((rs) => {
+            const dataArray = rs.data.dataArray;
+            console.log(dataArray);
         })
         .catch((err) => {
             console.log(err);
@@ -103,17 +148,23 @@ function UserManagementPage() {
       <>
         <Layout>
             <GridLayoutWidthProvided className="layout" layout={gridLayout} maxRows={row} rowHeight={rowHeight} cols={column}>
-                <div className="t-chart-wrap" id="t-user-list" key={0}>
+                <div className="t-chart-wrap" id="t-department-list" key={0}>
                     <div className="t-btn-3-wrap">
                         <button className="btn btn-secondary t-btn-3"><FontAwesomeIcon size={buttonSize} icon={faEdit} /></button>
                         <button className="btn btn-secondary t-btn-3 rm-1 lm-1 "><FontAwesomeIcon size={buttonSize} icon={faPlus} /></button>
                         <button className="btn btn-secondary t-btn-3"><FontAwesomeIcon size={buttonSize} icon={faTrash} /></button>
                     </div>
-                    <ToastGrid cssId="user-grid" columns={columns} dataArray={userList} />
+                    <ToastGrid cssId="department-grid" columns={departmentColumns} dataArray={departmentList} />
                 </div>
-                <div className="t-chart-wrap" id="t-chart-wrap-disk" key={1}>
-                    
+                <div className="t-chart-wrap" id="t-user-list" key={1}>
+                    <div className="t-btn-3-wrap">
+                        <button className="btn btn-secondary t-btn-3"><FontAwesomeIcon size={buttonSize} icon={faEdit} /></button>
+                        <button className="btn btn-secondary t-btn-3 rm-1 lm-1 "><FontAwesomeIcon size={buttonSize} icon={faPlus} /></button>
+                        <button className="btn btn-secondary t-btn-3"><FontAwesomeIcon size={buttonSize} icon={faTrash} /></button>
+                    </div>
+                    <ToastGrid cssId="user-grid" columns={userColumns} dataArray={userList} />
                 </div>
+                
                 <div className="t-chart-wrap"id="t-chart-wrap-network" key={2}>
                     
                 </div>
